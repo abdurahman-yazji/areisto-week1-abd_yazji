@@ -110,16 +110,51 @@ double get totalprice => subtotal - discountAmount;
 
 String recepit(){
 final buffer = StringBuffer();
-buffer.writeln('Areisto Coffee Shop\n');
-buffer.writeln('Customer: $customerName\n');
+buffer.writeln('\t\t------Areisto Coffee Shop------\n');
+buffer.writeln('Customer Name: $customerName\n');
 buffer.writeln('Items:\n');
 for (final drink in drinks){
   buffer.writeln(
     '${drink.description().padRight(35)}  ${drink.finalPrice.toStringAsFixed(2)} NIS',
       );
+
+      
 }
-buffer.writeln(('Total:${totalprice.toStringAsFixed(2)} NIS'));
+buffer.writeln('\nItem : $itemCount');
+      if (discountpercentage > 0){
+        buffer.writeln(
+        'Discount (${(discountpercentage * 100).toInt()}%): -${discountAmount.toStringAsFixed(2)} NIS',
+      );}
+buffer.writeln(('\n\t\t------Total Price:${totalprice.toStringAsFixed(2)} NIS------'));
 return buffer.toString();
 }}
 
+void main() {
+  final order = Order(customerName: 'ABD YAZJI');
+  
+  order.addDrink(coffee(
+    name: 'Espresso',
+   basePrice: 10.0,
+    size: DrinkSize.small,
+     extraShots: 1));
 
+  order.addDrink(Tea(
+    name: 'Black Tea',
+     basePrice: 10.0,
+      size: DrinkSize.medium,
+       isHerbal: true));
+
+  order.addDrink(Juice(
+    name: 'Mango Juice',
+     basePrice: 18.0,
+      size: DrinkSize.large, 
+      fruitType: 'Mango'));
+  
+  order.addDrink(coffee(
+    name: 'cappuccino', 
+    basePrice: 15.0, 
+    size: DrinkSize.large, 
+    extraShots: 2));
+
+  print(order.recepit());
+}
