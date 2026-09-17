@@ -28,6 +28,12 @@ String description();
   }
 
 
+  
+
+
+  
+
+
   class coffee extends Drink{
   
   final int extraShots;
@@ -65,3 +71,55 @@ return '$name (${size.name},$type)';
 
 }
 }
+
+class Juice extends Drink{
+
+final String fruitType;
+
+Juice({
+  required super.name,
+  required super.basePrice,
+  required super.size,
+  required this.fruitType,
+});
+
+
+String description(){
+return '$fruitType Juice ($name, ${size.name})';
+}
+}
+
+class Order{
+  final String customerName;
+  final List<Drink> drinks=[];
+  Order({required this.customerName});
+  void addDrink(Drink drink){
+    drinks.add(drink);
+  }
+  void removeDrink(Drink drink){
+    drinks.remove(drink);
+  }
+  int get itemCount => drinks.length;
+  double get subtotal => drinks.fold(0, (total, drink) => total + drink.finalPrice);
+  
+  double get discountpercentage => itemCount > 3 ? 0.10 : 0.0;
+
+  double get discountAmount => subtotal * discountpercentage;
+
+double get totalprice => subtotal - discountAmount;
+
+String recepit(){
+final buffer = StringBuffer();
+buffer.writeln('Areisto Coffee Shop\n');
+buffer.writeln('Customer: $customerName\n');
+buffer.writeln('Items:\n');
+for (final drink in drinks){
+  buffer.writeln(
+    '${drink.description().padRight(35)}  ${drink.finalPrice.toStringAsFixed(2)} NIS',
+      );
+}
+buffer.writeln(('Total:${totalprice.toStringAsFixed(2)} NIS'));
+return buffer.toString();
+}}
+
+
