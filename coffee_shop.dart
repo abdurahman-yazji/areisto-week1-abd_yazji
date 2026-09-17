@@ -45,7 +45,23 @@ String description();
 @override
   String description(){ 
 final shotsText = extraShots >0 ? ' ,$extraShots extra shots' : '';
-  return '$name   (${size.name}$shotsText)';
+  return '$name   (${size.name} $shotsText)';
 
   }
+}
+
+class Tea extends Drink{
+final bool isHerbal;
+
+Tea ({
+  required super.name,
+  required super.basePrice,
+  required super.size,
+  required this.isHerbal,
+});
+String description(){
+final type =isHerbal ? 'Herbal':'Normal';
+return '$name (${size.name},$type)';
+
+}
 }
