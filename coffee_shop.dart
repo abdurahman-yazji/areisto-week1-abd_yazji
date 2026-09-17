@@ -26,3 +26,26 @@ String description();
 
 
   }
+
+
+  class coffee extends Drink{
+  
+  final int extraShots;
+
+  coffee({
+    required super.name,
+    required super.basePrice,
+    required super.size,
+    required this.extraShots,
+      });
+  
+  @override
+  double get finalPrice => (basePrice * size.priceMultiplier) + (extraShots * 5);
+
+@override
+  String description(){ 
+final shotsText = extraShots >0 ? ' ,$extraShots extra shots' : '';
+  return '$name   (${size.name}$shotsText)';
+
+  }
+}
