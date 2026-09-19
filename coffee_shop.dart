@@ -34,11 +34,11 @@ String description();
   
 
 
-  class coffee extends Drink{
+  class Coffee extends Drink{
   
   final int extraShots;
 
-  coffee({
+  Coffee({
     required super.name,
     required super.basePrice,
     required super.size,
@@ -132,7 +132,7 @@ return buffer.toString();
 void main() {
   final order = Order(customerName: 'ABD YAZJI');
   
-  order.addDrink(coffee(
+  order.addDrink(Coffee(
     name: 'Espresso',
    basePrice: 10.0,
     size: DrinkSize.small,
@@ -150,7 +150,7 @@ void main() {
       size: DrinkSize.large, 
       fruitType: 'Mango'));
   
-  order.addDrink(coffee(
+  order.addDrink(Coffee(
     name: 'cappuccino', 
     basePrice: 15.0, 
     size: DrinkSize.large, 
